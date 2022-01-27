@@ -1,4 +1,4 @@
-heat_template_version: queens
+heat_template_version: rocky
 
 parameters:
   cluster_name:
@@ -21,11 +21,6 @@ parameters:
     type: string
     description: (optional) Name for cluster.
     default: coe_cluster_template
-  # keypair:
-  #   type: string
-  #   default: key
-  #   constraints:
-  #     - custom_constraint: nova.keypair
   flavor:
     type: string
     description: Flavor for the COE nodes to be created
@@ -93,7 +88,6 @@ resources:
     properties:
       name: { get_param: cluster_template_name }
       flavor: { get_param: flavor }
-      # keypair: { get_param: keypair }
       master_flavor: { get_param: master_flavor }
       image: { get_param: image }
       external_network: { get_param: external_network }
@@ -104,7 +98,7 @@ resources:
       floating_ip_enabled: { get_param: floating_ip_enabled }
       # docker_volume_size: 30
       network_driver: { get_param: network_driver }
-      docker_storage_driver: overlay2
+      docker_storage_driver: overlay
       volume_driver: cinder
       labels:
         monitoring_enabled: False
@@ -118,4 +112,4 @@ resources:
         ingress_controller: { get_param: ingress_controller }
         kube_tag: { get_param: kube_tag }
         cloud_provider_tag: { get_param: cloud_provider_tag }
-        # cinder_csi_plugin_tag: { get_param: cinder_csi_plugin_tag }
+        post_install_manifest_url: "https://raw.githubusercontent.com/leafcloudhq/magnum-templates/master/storageclass_manifests/storagclass-retain.yaml"

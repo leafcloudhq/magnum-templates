@@ -1,4 +1,4 @@
-heat_template_version: queens
+heat_template_version: rocky
 
 description: >
   This template demostrates how to create Magnum COE cluster.
@@ -10,6 +10,6 @@ resources:
       name: heat-cluster-1.21
       cluster_template: heat-k8s-1.21
       keypair: production_nodes
-      node_count: 1
+      node_count: 2
       master_count: 1
       create_timeout: 20
