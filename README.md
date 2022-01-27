@@ -28,3 +28,9 @@ os stack update -t templates.yaml templates
 * No storageclasses are set. post_install_manifest_url does not appear to work.
 
 Working storageclasses are provided here in storageclass_manifests
+
+
+## Instructions for use of the template:
+
+* For HA; consider using public api
+* Make sure to select master loadbalancer if you select to use multiple master nodes.

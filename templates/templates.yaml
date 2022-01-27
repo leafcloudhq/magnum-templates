@@ -10,20 +10,20 @@ resources:
   #     kube_tag: v1.19.12
   #     cloud_provider_tag: v1.19.2
 
-  k8s-1.20.8:
-    type: magnum_base_template.yaml
-    properties:
-      master_lb_enabled: False
-      floating_ip_enabled: True
-      cluster_template_name: heat-k8s-1.20.8-v1
-      kube_tag: v1.20.8
-      cloud_provider_tag: v1.20.2
-      cinder_csi_plugin_tag: v1.20.3
+  # k8s-1.20.8:
+  #   type: magnum_base_template.yaml
+  #   properties:
+  #     master_lb_enabled: False
+  #     floating_ip_enabled: True
+  #     cluster_template_name: heat-k8s-1.20.8-v1
+  #     kube_tag: v1.20.8
+  #     cloud_provider_tag: v1.20.2
+  #     cinder_csi_plugin_tag: v1.20.3
 
   k8s-1.21:
     type: magnum_base_template.yaml
     properties:
-      cluster_template_name: heat-k8s-1.21-v1
+      cluster_template_name: k8s-1.21.2-v1
       master_flavor: cn1.small
       flavor: ec1.medium
       master_lb_enabled: False
@@ -34,8 +34,7 @@ resources:
   k8s-1.21-HA:
     type: magnum_base_template.yaml
     properties:
-      public: True
-      cluster_template_name: heat-k8s-1.21-HA-v1
+      cluster_template_name: k8s-1.21.2-HA-v1
       master_flavor: cn1.medium
       flavor: ec1.medium
       master_lb_enabled: True
