@@ -1,11 +1,8 @@
-allowVolumeExpansion: true
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cinder-csi-plugin
-    meta.helm.sh/release-namespace: kube-system
   name: csi-cinder-sc-delete
 provisioner: cinder.csi.openstack.org
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
+allowVolumeExpansion: true
