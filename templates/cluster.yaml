@@ -1,0 +1,15 @@
+heat_template_version: queens
+
+description: >
+  This template demostrates how to create Magnum COE cluster.
+
+resources:
+  coe_cluster:
+    type: OS::Magnum::Cluster
+    properties:
+      name: heat-cluster-1.21
+      cluster_template: heat-k8s-1.21
+      keypair: production_nodes
+      node_count: 1
+      master_count: 1
+      create_timeout: 20
