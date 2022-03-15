@@ -1,5 +1,5 @@
-resource "openstack_containerinfra_clustertemplate_v1" "magnum-20-ha-beta2" {
-  name                  = "k8s-normal-v1.21.2-template-v2.0-ha-beta2"
+resource "openstack_containerinfra_clustertemplate_v1" "magnum-20-ha-beta4" {
+  name                  = "k8s-normal-v1.21.2-template-v2.0-ha-beta4"
   image                 = "fedora-coreos-33.20210426.3.0-openstack.x86_64"
   coe                   = "kubernetes"
   flavor                = "ec1.medium"
@@ -9,7 +9,7 @@ resource "openstack_containerinfra_clustertemplate_v1" "magnum-20-ha-beta2" {
   network_driver        = "calico"
   volume_driver         = "cinder"
   external_network_id   = "external"
-  floating_ip_enabled   = true
+  floating_ip_enabled   = false
   master_lb_enabled     = true
   public                = true
 
@@ -24,5 +24,8 @@ resource "openstack_containerinfra_clustertemplate_v1" "magnum-20-ha-beta2" {
     boot_volume_size              = 20
     boot_volume_type              = "encrypted"
     metrics_server_enabled        = "True"
+    auto_healing_enabled          = "True"
+    min_node_count                = 3
+    max_node_count                = 10
   }
 }

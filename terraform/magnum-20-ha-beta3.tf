@@ -1,5 +1,5 @@
-resource "openstack_containerinfra_clustertemplate_v1" "magnum-20-ha-beta" {
-  name                  = "k8s-normal-v1.21.2-template-v2.0-ha-beta"
+resource "openstack_containerinfra_clustertemplate_v1" "magnum-20-ha-beta3" {
+  name                  = "k8s-normal-v1.21.2-template-v2.0-ha-beta3"
   image                 = "fedora-coreos-33.20210426.3.0-openstack.x86_64"
   coe                   = "kubernetes"
   flavor                = "ec1.medium"
@@ -21,7 +21,11 @@ resource "openstack_containerinfra_clustertemplate_v1" "magnum-20-ha-beta" {
     container_infra_prefix        = "ghcr.io/stackhpc/"
     cloud_provider_tag            = "v1.20.2"
     admission_control_list        = "NodeRestriction,PodSecurityPolicy,NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,TaintNodesByCondition,Priority,DefaultTolerationSeconds,DefaultStorageClass,StorageObjectInUseProtection,PersistentVolumeClaimResize,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,RuntimeClass"
-    post_install_manifest_url     = "https://raw.githubusercontent.com/leafcloudhq/magnum-templates/master/storageclass_manifests/storagclass-retain.yaml"
+    boot_volume_size              = 20
+    boot_volume_type              = "encrypted"
+    metrics_server_enabled        = "True"
+    auto_healing_enabled          = "True"
+    min_node_count                = 3
+    max_node_count                = 10
   }
 }
-
