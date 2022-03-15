@@ -77,10 +77,24 @@ parameters:
     type: string
     description: What ingress controller to use?
     default: nginx
+  has_ingress_controller:
+    type: boolean
+    description: If an ingress controller should be deployed
+    default: false
   magnum_auto_healer_tag:
     type: string
     description: What auto healer tag to use?
     default: v1.20.0
+  auto_healing_enabled:
+    type: boolean
+    default: False
+  auto_scaling_enabled:
+    type: boolean
+    default: False
+
+conditions:
+  has_ingress_controller:
+    get_param: ingress_controller
 
 resources:
   thatchers_k8s_tmp:
@@ -102,14 +116,14 @@ resources:
       volume_driver: cinder
       labels:
         monitoring_enabled: False
-        auto_scaling_enabled: False
-        auto_healing_enabled: False
+        auto_scaling_enabled: { get_param: auto_scaling_enabled }
+        auto_healing_enabled: { get_param: auto_healing_enabled }
         auto_healing_controller: magnum-auto-healer
         magnum_auto_healer_tag: { get_param: magnum_auto_healer_tag }
         master_lb_floating_ip_enabled: True
         cinder_csi_enabled: True
         container_infra_prefix: ghcr.io/stackhpc/
-        ingress_controller: { get_param: ingress_controller }
+        ingress_controller: { get_param: magnum_auto_healer_tag }
         kube_tag: { get_param: kube_tag }
         cloud_provider_tag: { get_param: cloud_provider_tag }
         post_install_manifest_url: "https://raw.githubusercontent.com/leafcloudhq/magnum-templates/master/storageclass_manifests/storagclass-retain.yaml"

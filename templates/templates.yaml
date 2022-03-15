@@ -30,6 +30,18 @@ resources:
       floating_ip_enabled: True
       kube_tag: v1.21.2
       cloud_provider_tag: v1.20.2
+      ingress_controller: nginx
+
+  k8s-1.21-v1.1:
+    type: magnum_base_template.yaml
+    properties:
+      cluster_template_name: k8s-1.21.2-v1.1
+      master_flavor: cn1.small
+      flavor: ec1.medium
+      master_lb_enabled: False
+      floating_ip_enabled: True
+      kube_tag: v1.21.2
+      cloud_provider_tag: v1.20.2
 
   k8s-1.21-HA:
     type: magnum_base_template.yaml
@@ -41,3 +53,19 @@ resources:
       floating_ip_enabled: False
       kube_tag: v1.21.2
       cloud_provider_tag: v1.20.2
+  #     ingress_controller: nginx
+
+  k8s-1.21-HA-v1.1:
+    type: magnum_base_template.yaml
+    properties:
+      cluster_template_name: k8s-1.21.2-HA-v1.1
+      master_flavor: cn1.medium
+      flavor: ec1.medium
+      master_lb_enabled: True
+      floating_ip_enabled: False
+      kube_tag: v1.21.2
+      cloud_provider_tag: v1.20.2
+      auto_healing_enabled: True
+      auto_scaling_enabled: True
+      ingress_controller: nginx
+      # max_node_count: 15
