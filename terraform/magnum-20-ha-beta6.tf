@@ -1,6 +1,6 @@
-resource "openstack_containerinfra_clustertemplate_v1" "magnum-20-ha-beta4" {
-  name                  = "k8s-normal-v1.21.2-template-v2.0-ha-beta4"
-  image                 = "fedora-coreos-33.20210426.3.0-openstack.x86_64"
+resource "openstack_containerinfra_clustertemplate_v1" "magnum-20-ha-beta6" {
+  name                  = "k8s-normal-v1.21.2-template-v2.0-ha-beta6"
+  image                 = "CoreOS-33"
   coe                   = "kubernetes"
   flavor                = "ec1.medium"
   master_flavor         = "cc1.medium"
@@ -24,8 +24,10 @@ resource "openstack_containerinfra_clustertemplate_v1" "magnum-20-ha-beta4" {
     boot_volume_size              = 20
     boot_volume_type              = "encrypted"
     metrics_server_enabled        = "True"
-    auto_healing_enabled          = "True"
     min_node_count                = 3
     max_node_count                = 10
+    auto_healing_enabled          = "True"
+    auto_healing_controller       = "magnum-auto-healer"
+    magnum_auto_healer_tag        = "v1.20.0"
   }
 }
