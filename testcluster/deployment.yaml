@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: qotd
-  namespace: default
+  namespace: leafcloud
 spec:
   selector:
     matchLabels:
@@ -22,3 +22,10 @@ spec:
           ports:
             - containerPort: 80
               name: http
+          volumeMounts:
+            - mountPath: "/mnt/testvol"
+              name: testvol
+      volumes:
+        - name: testvol
+          persistentVolumeClaim:
+            claimName: mypvc
